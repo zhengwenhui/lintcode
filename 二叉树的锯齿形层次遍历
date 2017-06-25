@@ -1,0 +1,63 @@
+[二叉树的锯齿形层次遍历](http://www.lintcode.com/zh-cn/problem/binary-tree-zigzag-level-order-traversal/)
+``` java
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+ 
+ 
+public class Solution {
+    /**
+     * @param root: The root of binary tree.
+     * @return: A list of lists of integer include 
+     *          the zigzag level order traversal of its nodes' values 
+     */
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
+        // write your code here
+        ArrayList<ArrayList<Integer>> treeMap = new ArrayList<ArrayList<Integer>>();
+        
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        
+        if ( root == null ){
+            return treeMap;
+        }
+
+        int layout = 0;
+        
+        while( queue.size() > 0 ){
+            layout++;
+            int count = queue.size();
+            ArrayList<Integer> treeList = new ArrayList<Integer>();
+            
+            for (int i = 0; i < count; i++ ){
+                TreeNode node = queue.remove();
+                
+                if ( layout % 2 == 1 ) {
+                    treeList.add(node.val);
+                } else {
+                    treeList.add(0, node.val);
+                }
+
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+            }
+            treeMap.add(treeList);
+        }
+        
+        return treeMap;
+    }
+}
+```
