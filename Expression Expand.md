@@ -1,4 +1,5 @@
-[](http://www.lintcode.com/zh-cn/problem/expression-expand/)
+[Expression Expand](http://www.lintcode.com/zh-cn/problem/expression-expand/)
+
 ``` java
 public class Solution {
     /**
