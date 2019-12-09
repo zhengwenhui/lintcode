@@ -62,4 +62,56 @@ public class Solution {
         return false;
     }
 }
+
+//方法2
+public class Solution {
+    /**
+     * @param s: an expression includes numbers, letters and brackets
+     * @return: a string
+     */
+    public String expressionExpand(String s) {
+        // write your code here
+        StringBuilder stringBuilder;
+            char temp;
+
+            LinkedList<Character> stack = new LinkedList<>();
+            char[] chars = s.toCharArray();
+            for (char achar : chars){
+                if(achar!=']'){
+                    stack.push(achar);
+                }else{
+                    stringBuilder = new StringBuilder();
+                    while ((temp = stack.pop()) != '['){
+                        stringBuilder.append(temp);
+                    }
+
+                    int sw = 1;
+                    int count = 0;
+                    while ( stack.peek() != null) {
+                        char cchar = stack.peek();
+                        int t = cchar - 48;
+                        if (t < 0 || t > 9) {
+                            break;
+                        }
+                        stack.pop();
+                        count += (t * sw);
+                        sw *= 10;
+                    }
+                    String subStr = stringBuilder.reverse().toString();
+                    for (int i =0; i<count; i++){
+                        for (char bchar : subStr.toCharArray()){
+                            stack.push(bchar);
+                        }
+                    }
+                }
+            }
+
+            stringBuilder = new StringBuilder();
+            while (stack.peek()!=null){
+                stringBuilder.append(stack.pop());
+            }
+
+            return stringBuilder.reverse().toString();
+    }
+}
 ```
